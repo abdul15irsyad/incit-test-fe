@@ -13,6 +13,17 @@ export const profile = async () => {
   });
 };
 
+export interface SetPasswordProps {
+  newPassword: string;
+  confirmPassword: string;
+}
+
+export const setPassword = async (data: SetPasswordProps) => {
+  return await axios.patch('/api/profile/set-password', data, {
+    withCredentials: true,
+  });
+};
+
 export interface UpdatePasswordProps {
   oldPassword: string;
   newPassword: string;
@@ -20,7 +31,15 @@ export interface UpdatePasswordProps {
 }
 
 export const updatePassword = async (data: UpdatePasswordProps) => {
-  return await axios.post('/api/profile/update-password', data, {
+  return await axios.patch('/api/profile/update-password', data, {
+    withCredentials: true,
+  });
+};
+
+export type UpdateProfileProps = Pick<IUser, 'name'>;
+
+export const updateProfile = async (data: UpdateProfileProps) => {
+  return await axios.patch('/api/profile/update', data, {
     withCredentials: true,
   });
 };

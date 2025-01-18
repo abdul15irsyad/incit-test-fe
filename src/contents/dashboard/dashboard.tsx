@@ -32,26 +32,17 @@ export const DashboardContent = () => {
                 </div>
                 <div className="flex justify-center gap-2">
                   <Link
-                    href="/dashboard/profile/update-password"
+                    href="/dashboard/profile/update"
                     className="text-sm rounded-lg justify-center items-center gap-1 dark:bg-blue-600 dark:hover:bg-blue-700 text-black dark:text-white px-5 py-2.5 text-center"
                   >
                     Update Profile
                   </Link>
-                  {user.isHavePassword ? (
-                    <Link
-                      href="/dashboard/profile/update-password"
-                      className="text-sm rounded-lg justify-center items-center gap-1 dark:bg-blue-600 dark:hover:bg-blue-700 text-black dark:text-white px-5 py-2.5 text-center"
-                    >
-                      Update Password
-                    </Link>
-                  ) : (
-                    <Link
-                      href="/dashboard/profile/set-password"
-                      className="text-sm rounded-lg justify-center items-center gap-1 dark:bg-blue-600 dark:hover:bg-blue-700 text-black dark:text-white px-5 py-2.5 text-center"
-                    >
-                      Set Password
-                    </Link>
-                  )}
+                  <Link
+                    href="/dashboard/profile/update-password"
+                    className="text-sm rounded-lg justify-center items-center gap-1 dark:bg-blue-600 dark:hover:bg-blue-700 text-black dark:text-white px-5 py-2.5 text-center"
+                  >
+                    {user?.isHavePassword ? 'Update' : 'Set'} Password
+                  </Link>
                   <button
                     className="text-sm rounded-lg justify-center items-center gap-1 dark:hover:border-gray-500 dark:hover:bg-gray-500  text-black dark:text-white px-5 py-2.5 text-center"
                     onClick={handleLogout}
