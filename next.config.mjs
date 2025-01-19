@@ -8,10 +8,6 @@ const nextConfig = {
           ? `${process.env.NEXT_PUBLIC_API_URL}/:path*`
           : '/api/:path*',
       },
-      {
-        source: '/api/auth/facebook/callback',
-        destination: '/api/auth/facebook/callback',
-      },
     ];
   },
 };

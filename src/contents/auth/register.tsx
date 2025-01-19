@@ -136,7 +136,7 @@ export const RegisterContent = () => {
                 >
                   Password
                 </label>
-                <RHFPasswordInput name="password" id="password" />
+                <RHFPasswordInput name="password" id="password" useHint />
               </div>
               <div>
                 <label

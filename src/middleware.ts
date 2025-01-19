@@ -10,7 +10,7 @@ export const middleware = async (request: NextRequest) => {
     !accessToken
   ) {
     const queryString = new URLSearchParams();
-    queryString.append('return-to', request.nextUrl.pathname);
+    queryString.set('return-to', request.nextUrl.pathname);
 
     return NextResponse.redirect(
       new URL(`/auth/login?${queryString.toString()}`, request.url),

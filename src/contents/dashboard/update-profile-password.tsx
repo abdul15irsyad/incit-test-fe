@@ -119,7 +119,7 @@ export const UpdateProfilePasswordContent = () => {
                 >
                   New Password
                 </label>
-                <RHFPasswordInput name="newPassword" id="newPassword" />
+                <RHFPasswordInput name="newPassword" id="newPassword" useHint />
               </div>
               <div>
                 <label

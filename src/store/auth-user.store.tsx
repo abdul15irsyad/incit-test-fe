@@ -14,6 +14,7 @@ export interface IUser {
   id: string;
   name: string;
   email: string;
+  emailVerifiedAt?: Date;
   isHavePassword: boolean;
 }
 

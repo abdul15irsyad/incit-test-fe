@@ -1,10 +1,40 @@
+import { IconCircleCheck } from '@tabler/icons-react';
 import React, { InputHTMLAttributes, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
+const minLength = /^.{8,}$/;
+const uppercaseRegex = /[A-Z]/;
+const lowercaseRegex = /[a-z]/;
+const numberRegex = /\d/;
+const specialCharRegex = /[@$!%*?&]/;
+const strongPasswordRegexs = [
+  {
+    label: 'min 8 characters',
+    regex: minLength,
+  },
+  {
+    label: 'uppercase',
+    regex: uppercaseRegex,
+  },
+  {
+    label: 'lowercase',
+    regex: lowercaseRegex,
+  },
+  {
+    label: 'number',
+    regex: numberRegex,
+  },
+  {
+    label: 'special char',
+    regex: specialCharRegex,
+  },
+];
+
 export const RHFPasswordInput = ({
   name,
+  useHint,
   ...props
-}: InputHTMLAttributes<HTMLInputElement>) => {
+}: { useHint?: boolean } & InputHTMLAttributes<HTMLInputElement>) => {
   const { control } = useFormContext();
   const [showPassword, setShowPassword] = useState<boolean>(false);
   return (
@@ -17,6 +47,7 @@ export const RHFPasswordInput = ({
             <input
               {...field}
               autoComplete="off"
+              autoCorrect="off"
               type={showPassword ? 'text' : 'password'}
               className={`bg-gray-50 border ${error ? 'border-red-500 ' : 'border-gray-300 dark:border-gray-600'} focus:outline-none text-gray-900 rounded-lg block w-full p-2.5 dark:bg-gray-700  dark:placeholder-gray-500 dark:text-white`}
               placeholder="••••••••"
@@ -79,8 +110,26 @@ export const RHFPasswordInput = ({
           {error && (
             <p className="text-red-500 text-xs mt-1 ms-1">{error.message}</p>
           )}
+          {useHint && <PasswordHint password={field.value} />}
         </>
       )}
     />
+  );
+};
+
+const PasswordHint = ({ password }: { password: string }) => {
+  return (
+    // <div className="grid grid-cols-3 gap-2 pt-2">
+    <div className="flex flex-wrap gap-2 pt-2">
+      {strongPasswordRegexs.map(({ label, regex }, index) => (
+        <div
+          key={index}
+          className={`text-sm inline-flex items-center gap-1 rounded-md px-1.5 pr-2 py-1 ${regex.test(password) ? 'dark:bg-green-100 dark:text-green-800' : 'dark:bg-gray-700 dark:text-gray-400'}`}
+        >
+          <IconCircleCheck size={16} />
+          <span className="-mt-0.5">{label}</span>
+        </div>
+      ))}
+    </div>
   );
 };
